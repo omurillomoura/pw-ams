@@ -8,6 +8,11 @@
 <body>
 
     <h1>Javascript</h1>
+
+    <button onclick="calcular()">
+        Calculadora 
+    </button>
+
     <script>
 
         /*var idade = 20
@@ -45,7 +50,7 @@
         alert*("Não pode beber")
        }*/
 
-       var idade = prompt("Digite sua idade: ")
+      /* var idade = prompt("Digite sua idade: ")
        if (idade >=16)
          {
           alert("Pode votar")
@@ -54,7 +59,46 @@
          else
          {
           alert("Não pode votar")
+         }*/
+
+         /*for(let i = 0; i < 10; i++)
+         {
+            document.write(`Interação número ${i} <br/>`)
          }
+         let i = 0
+         while (i < 10) {
+            document.write(`Interação com while número ${i} <br/>`)
+            i++
+         }*/
+
+         function calcular()
+         {
+            let num1 = Number(prompt("Digite um número: "))
+            let num2 = Number(prompt("Digite outro número: "))
+            var escolha = Number(prompt("Escolha a operação: \n 1 - Soma \n 2 - Divisão \n 3 - Multiplicação \n 4 - Subtração"))
+            
+            if (escolha == 1) {
+                let soma = num1 + num2
+                alert("A soma é: " + soma)
+            }
+            else if (escolha == 2) {
+                let divisao = num1 / num2
+                alert("A divisão é: " + divisao)
+            }
+            else if (escolha == 3) {
+                let multiplicacao = num1 * num2
+                alert("A multiplicação é: " + multiplicacao)
+            }
+            else if (escolha == 4) {
+                let subtracao = num1 - num2
+                alert("A subtração é: " + subtracao)
+            }
+            else {
+                alert("Opção inválida")
+            }
+        
+         }
+
 
 
 
