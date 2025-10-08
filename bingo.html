@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Bingo Gostosinho</title>
     <style>
         table {
             background-color: white;
             padding: 10px, 10px, 10px, 10px;
             border: 1px solid black;
-            font-size: 35px;
+            font-size: 50px;
+            border-radius: 15px;
         }
 
         td {
-            border-radius: 5px;
+            border-radius: 15px;
             border: 1px solid;
             text-align: center;
             padding: 10px;
@@ -45,41 +46,54 @@
     </thead>
     <tbody>
         <tr>
-            <td>12</td>
-            <td>24</td>
-            <td>33</td>
-            <td>46</td>
-            <td>72</td>
+            <td id="b1" onclick="Clicou(this)">12</td>
+            <td id="i1" onclick="Clicou(this)">24</td>
+            <td id="n1" onclick="Clicou(this)">33</td>
+            <td id="g1" onclick="Clicou(this)">46</td>
+            <td id="o1" onclick="Clicou(this)">72</td>
         </tr>
         <tr>
-            <td>13</td>
-            <td>25</td>
-            <td>36</td>
-            <td>49</td>
-            <td>75</td>
+            <td id="b2" onclick="Clicou(this)">13</td>
+            <td id="i2" onclick="Clicou(this)">25</td>
+            <td id="n2" onclick="Clicou(this)">36</td>
+            <td id="g2" onclick="Clicou(this)">49</td>
+            <td id="o2" onclick="Clicou(this)">75</td>
         </tr>
         <tr>
-            <td>10</td>
-            <td>22</td>
-            <td>31</td>
-            <td>51</td>
-            <td>69</td>
+            <td id="b3" onclick="Clicou(this)">10</td>
+            <td id="i3" onclick="Clicou(this)">22</td>
+            <td id="n3" onclick="Clicou(this)">31</td>
+            <td id="g3" onclick="Clicou(this)">51</td>
+            <td id="o3" onclick="Clicou(this)">69</td>
         </tr>
         <tr>
-            <td>9</td>
-            <td>18</td>
-            <td>42</td>
-            <td>60</td>
-            <td>66</td>
+            <td id="b4" onclick="Clicou(this)">9</td>
+            <td id="i4" onclick="Clicou(this)">18</td>
+            <td id="n4" onclick="Clicou(this)">42</td>
+            <td id="g4" onclick="Clicou(this)">60</td>
+            <td id="o4" onclick="Clicou(this)">66</td>
         </tr>
         <tr>
-            <td>1</td>
-            <td>26</td>
-            <td>40</td>
-            <td>53</td>
-            <td>74</td>
+            <td id="b5" onclick="Clicou(this)">1</td>
+            <td id="i5" onclick="Clicou(this)">26</td>
+            <td id="n5" onclick="Clicou(this)">40</td>
+            <td id="g5" onclick="Clicou(this)">53</td>
+            <td id="o5" onclick="Clicou(this)">74</td>
         </tr>
     </tbody>
 </table>
+
+<script>
+    function Clicou(elemento) {
+        if (elemento.style.backgroundColor == "Yellow") {
+            elemento.style.backgroundColor = "white"
+        }
+        else {
+            elemento.style.backgroundColor = "yellow"
+        }
+    }
+       
+</script>
+
 </body>
-</html>
+</html>        
