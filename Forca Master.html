@@ -1,34 +1,37 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!-- Define que o documento está no padrão HTML5 -->
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Forca Master</title>
+  <meta charset="UTF-8"> <!-- Permite caracteres especiais (acentos, ç, etc.) -->
+  <title>Forca Master</title> <!-- Nome exibido na aba do navegador -->
 
   <style>
+    /* Estilo geral da página */
     body {
-      margin: 0;
-      padding: 0;
-      background: #f5f5f5;
-      font-family: "Segoe UI", Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      color: #222;
+      margin: 0; /* Remove margens padrão */
+      padding: 0; /* Remove espaçamentos internos */
+      background: #f5f5f5; /* Cor de fundo da página */
+      font-family: "Segoe UI", Arial, sans-serif; /* Define fontes */
+      display: flex; /* Usa Flexbox para alinhar o conteúdo */
+      justify-content: center; /* Centraliza horizontalmente */
+      align-items: center; /* Centraliza verticalmente */
+      min-height: 100vh; /* Ocupa 100% da altura da tela */
+      color: #222; /* Cor principal do texto */
     }
 
+    /* Caixa principal do jogo */
     .container {
-      background: #ffffff;
-      padding: 35px 45px;
-      border-radius: 16px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-      width: 380px;
-      position: relative;
-      text-align: center;
+      background: #ffffff; /* Fundo branco */
+      padding: 35px 45px; /* Espaçamento interno */
+      border-radius: 16px; /* Bordas arredondadas */
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08); /* Sombra suave */
+      width: 380px; /* Largura fixa */
+      position: relative; /* Permite posicionar elementos internamente */
+      text-align: center; /* Centraliza texto */
     }
 
+    /* Estilo da etiqueta de versão */
     .versao {
-      position: absolute;
+      position: absolute; /* Fixa dentro do container */
       top: 10px;
       right: 15px;
       font-size: 14px;
@@ -36,6 +39,7 @@
       color: #777;
     }
 
+    /* Estilo do título */
     h2 {
       margin-top: 0;
       font-size: 28px;
@@ -43,41 +47,47 @@
       color: #333;
     }
 
+    /* Estilo comum para select, inputs e botões */
     select, input, button {
-      width: 100%;
-      height: 42px;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      box-sizing: border-box;
+      width: 100%; /* Ocupa largura total */
+      height: 42px; /* Altura fixa */
+      padding: 10px; /* Espaçamento interno */
+      margin-top: 10px; /* Espaçamento superior */
+      border-radius: 8px; /* Bordas arredondadas */
+      border: 1px solid #ccc; /* Borda cinza clara */
+      font-size: 16px; /* Tamanho do texto */
+      box-sizing: border-box; /* Inclui padding dentro da largura total */
     }
 
+    /* Estilo dos botões */
     button {
       border: none;
-      background: #007bff;
+      background: #007bff; /* Cor azul */
       color: white;
       font-weight: bold;
       cursor: pointer;
-      transition: 0.2s;
+      transition: 0.2s; /* Efeito de animação ao passar o mouse */
     }
 
+    /* Estilo do botão quando passa o mouse */
     button:hover:not(:disabled) {
       background: #005fcc;
     }
 
+    /* Botão desativado */
     button:disabled {
       background: #aaa;
       cursor: not-allowed;
     }
 
+    /* Área dos corações de vida */
     .coracoes {
       font-size: 32px;
       margin: 10px 0;
       letter-spacing: 2px;
     }
 
+    /* Texto que mostra vidas restantes */
     #vidasTexto {
       font-size: 18px;
       margin-top: 15px;
@@ -85,6 +95,7 @@
       color: #333;
     }
 
+    /* Estilo da palavra exibida como _ _ _ */
     #palavra {
       font-size: 26px;
       letter-spacing: 4px;
@@ -92,30 +103,27 @@
       font-weight: 600;
     }
 
+    /* Texto que mostra a quantidade de letras por palavra */
     #contador {
       margin-top: 5px;
       color: #777;
       font-size: 14px;
     }
 
+    /* Mensagens de resultado (acertou, errou, venceu) */
     #resultado {
       margin-top: 15px;
       font-size: 16px;
       font-weight: bold;
       color: #444;
-      min-height: 24px;
+      min-height: 24px; /* Mantém altura fixa para não mover os elementos */
     }
 
+    /* Letras já tentadas */
     #letrasTentadas {
       font-size: 14px;
       margin-top: 10px;
       color: #555;
-    }
-
-    #dicaTexto {
-      margin-top: 10px;
-      font-weight: 600;
-      color: #444;
     }
 
   </style>
@@ -123,11 +131,12 @@
 
 <body>
 
-<div class="container">
+<div class="container"> <!-- Caixa principal do jogo -->
 
-  <div class="versao">v1.1</div>
-  <h2>Forca Master</h2>
+  <div class="versao">v1.1</div> <!-- Versão do sistema -->
+  <h2>Forca Master</h2> <!-- Título principal -->
 
+  <!-- Menu de seleção de temas -->
   <label>Tema:</label>
   <select id="tema">
     <option value="comidas">Comidas</option>
@@ -141,87 +150,89 @@
     <option value="Famosos">Famosos</option>
   </select>
 
+  <!-- Botão que inicia o jogo -->
   <button id="btnEscolher" onclick="escolherPalavra()">Escolher Palavra</button>
 
+  <!-- Exibição de vidas -->
   <p id="vidasTexto"></p>
   <div id="vidas" class="coracoes"></div>
 
-  <!-- BOTÃO E TEXTO DA DICA -->
-  <button id="btnDica" onclick="usarDica()" disabled>Usar Dica (Custo: 2 Vidas)</button>
-  <p id="dicaTexto"></p>
-
+  <!-- Exibição da palavra -->
   <p id="palavra"></p>
   <p id="contador"></p>
 
+  <!-- Entrada de letras individuais -->
   <input id="letra" maxlength="1" placeholder="Digite uma letra" disabled>
   <button id="btnEnviar" onclick="enviarLetra()" disabled>Enviar</button>
 
+  <!-- Chute da palavra completa -->
   <input id="chute" placeholder="Chutar a palavra inteira" disabled>
   <button onclick="chutarPalavra()" id="btnChutar" disabled>Chutar</button>
 
+  <!-- Mensagens e histórico -->
   <p id="resultado"></p>
   <p id="letrasTentadas"></p>
 
 </div>
 
 <script>
-  const palavras = {
-    comidas: ["feijoada", "farofa", "acarajé", "cuscuz", "brigadeiro", "pamonha", "vatapá", "tapioca","moqueca","escondidinho","churrasco","lasanha","sushi","hambúrguer","panqueca","croissant","ratatouille","ceviche","fondue","gazpacho","moussaka","paella","quiche","sashimi","tiramisu","yakisoba","yakitori","arepa","biryani","dumpling","falafel","gnocchi","jambalaya","kimchi","pierogi","souvlaki","tagine","tostada","ziti","baba ganoush","chowder","empanada","frittata","goulash","hummus","injera","jollof","kebab","loco moco","maki","naan","okonomiyaki","poutine","quinoa","risotto","samosa","tandoori","udon","vindaloo","wonton","yuca"],
-    animais: ["quati","saracura","tatu bola","veado campeiro","zangão","bicho folharal","coruja buraqueira","ema","gambá","iguana","jiboia","muriqui","naja","pintado","quero-quero","rêmora","sabiá-laranjeira","urubu-rei","vicunha","xexéu","zebra fincão","antílope","barracuda","canguru","dromedário","elefante","falcão","girafa","hipopótamo","javali","kiwi","leão-marinho","morcego","ornitorrinco","panda","quokka","rinoceronte","suricato","tamanduá-bandeira","urso-pardo","vaca-marinha","wallaby","xerente","yak","zebu","águia","búfalo","camaleão","doninha","ema","flamingo","golfinho","hamster","índigo-bunting","jararaca","kiwi","lagarto","marlim","narval","ocapi","pavão","quati","raposa","salamandra","tucano","urial","vespa","xaréu","zangão"],
-    objetos: ["caderno","chinelo","garrafa","cadeira","janela","abajur","almofada","bule","caneca","escova","faca","lanterna","mochila","panela","quadro","relógio","tesoura","ventilador","xícara","zebra de brinquedo","apontador","balança","calculadora","despertador","envelope","fita adesiva","grampeador","headphone","impressora","jarra","lâmpada","microfone","notebook","óculos","penteadeira","quebra-cabeça","rádio","sapateira","telefone","usb drive","vassoura","xerox machine","zíper","abajur de mesa","batedeira","câmera fotográfica","disco rígido","estante","filtro de água","grelha","hidrante","isqueiro","jogo de tabuleiro","kit de primeiros socorros","lixeira","máquina de café","navegador GPS","organizador de mesa","porta-retrato","quebra-sol","rolo de pintura","suporte para livros","tábua de passar roupa","urna de vidro","ventilador de teto","xadrez portátil","zócalo elétrico"],
-    Países: ["Brasil","Japão","Canadá","Egito","Chile","França","Alemanha","Itália","México","Noruega","Portugal","Rússia","Suécia","Turquia","Ucrânia","Vietnã","Argentina","Bélgica","Colômbia","Dinamarca","Espanha","Finlândia","Grécia","Hungria","Índia","Jordânia","Kuwait","Líbano","Malásia","Nepal","Omã","Peru","Qatar","Romênia","Senegal","Tailândia","Uganda","Venezuela","Zâmbia","Austrália","Bulgária","Cuba","Eslováquia","Filipinas","Gana","Honduras","Irlanda","Jamaica","Lituânia","Mongólia","Nicarágua","Panamá","Quênia","Sérvia","Tanzânia","Uruguai","Zimbábue","África do Sul","Bahamas","Croácia","Estônia","Fiji","Guatemala","Haiti","Islândia","Líbia","Malta","Nicaragua","Paraguai","Ruanda","Síria","Togo","Uzbequistão","Yemen","Zaire","Áustria","Bolívia","Camarões","Djibuti","El Salvador","Gâmbia","Iêmen","Lesoto","Mali","Nauru","Palau","Reino Unido","Togo","Vanuatu","Zâmbia"],
-    Jogadores: ["Neymar","Pelé","Zico","Ronaldo","Romário","Ronaldinho","Kaká","Cafu","Roberto Carlos","Garrincha","Tostão","Sócrates","Didi","Falcão","Jairzinho","Rivelino","Cláudio Taffarel","Bebeto","Dunga","Juninho Pernambucano","Adriano","Alexandre Pato","Thiago Silva","David Luiz","Casemiro","Alisson Becker","Gabriel Jesus","Philippe Coutinho","Arthur Melo","Vinícius Júnior","Rodrygo Goes","Éder Militão","Bruno Henrique","Richarlison","Allan Marques","Fred","Willian Borges","Douglas Costa","Lucas Paquetá","Renato Augusto","Marquinhos","Fabinho Tavares","Diego Alves","Wellington Nem","Hulk Hogan","César Sampaio","Zé Roberto","Gilberto Silva","Alex Sandro","Danilo Luiz da Silva","Fábio Aurélio","Júlio César Soares Espíndola","Maxwell Scherrer","Rafinha Alcântara","Ramires Santos do Nascimento","Maicon Douglas Sisenando","Henrique Adriano Buss","Lúcio","Juan Jesus","Bruno Alves de Souza","Cássio Ramos","Ederson Santana de Moraes","Weverton Pereira da Silva","Rodrigo Caio Coquette","Lucas Moura da Silva","Taison Barcellos Freda","Fernandinho","Renan Lodi Silva","Gerson Santos da Silva","Paquetá","Éverton Ribeiro","Diego Costa Silva"],
-    Marcas: ["Nike","Adidas","Toyota","Apple","Intel","Samsung","Coca-Cola","Pepsi","Microsoft","Google","Amazon","Facebook","IBM","Honda","Ford","Chevrolet","Volkswagen","Mercedes-Benz","Audi","Puma","Reebok","LG","Sony","Dell","HP","Nissan","Hyundai","Kia","Lexus","Subaru","Mazda","Toshiba","Panasonic","Canon","Nikon","Hewlett-Packard","Siemens","Philips","Accenture","Cisco","Oracle","SAP","Salesforce","Uber","Airbnb","Netflix","Spotify","Snapchat","Twitter","LinkedIn","eBay","PayPal","Visa","Mastercard","Shell","ExxonMobil","BP","Chevron","FedEx","UPS","DHL","3M","Boeing","Caterpillar","John Deere","General Electric","Lockheed Martin","Northrop Grumman","Raytheon","Schneider Electric","Siemens Healthineers","Texas Instruments","Western Digital","ZTE","Xerox","Yamaha","Zara","H&M","IKEA","L'Oréal","Unilever","Procter & Gamble","Nestlé","Johnson & Johnson","Colgate-Palmolive","Kellogg's","Mondelez International","Danone","Heineken","Carlsberg","Red Bull","Budweiser","Corona","Guinness","Ferrari","Lamborghini","Maserati","Bugatti","Rolls-Royce","Aston Martin","Jaguar","Land Rover","Cadillac","Lincoln","Buick","GMC","Chrysler","Dodge","Jeep"],
-    Nomes: ["Ana","Bruno","Carla","Daniel","Eduardo","Fernanda","Gabriel","Helena","Igor","Juliana","Kátia","Lucas","Mariana","Natália","Otávio","Patrícia","Quésia","Rafael","Sabrina","Tiago","Ursula","Vinícius","Wagner","Yasmin","Zézinho","Alice","Beatriz","Caio","Diana","Enzo","Fabiana","Gustavo","Heloísa","Isabela","João","Larissa","Matheus","Nicole","Pedro","Raquel","Samuel","Tainá","Vitor","William","Ximena","Yuri","Zara","Amanda","Bruna","Cecília","Diego","Elisa","Fábio","Giovanna","Henrique","Isadora","Júlia","Kevin","Lívia","Murilo","Nina","Paulo","Renata","Sérgio","Thaís","Valentina","Wesley","Yara","Zilda","Alessandra","Bruno","Clara","Davi","Esther","Felipe","Giulia","Heitor","Iara","Jorge","Karla","Leandro","Mirella","Nicolas","Olívia","Priscila","Rômulo","Sofia","Thiago","Vitória","Yago","Zélia", "Arthur","Bianca","Cauã","Débora","Emanuel","Flávia","Guilherme","Hanna","Ian","Janaína","Luan","Marina","Natan","Olga","Paula","Rita","Sandro","Tatiana","Vânia","Wellington","Yasmin","Zoraide", "Cauã","Brenda","Cássio","Dora","Eloá","Fabrício","Giovanni","Hilda","Isaque","Jana","Kauan","Lara","Malu","Nicolas","Priscila","Ruan","Suelen","Túlio","Vera"],
-    Filmes: ["Titanic","Bacurau","Carandiru","Estômago","Marighella","Central do Brasil","Cidade de Deus","Tropa de Elite","O Auto da Compadecida","Que Horas Ela Volta?","Aquarius","O Pagador de Promessas","O Ano em que Meus Pais Saíram de Férias","Se Eu Fosse Você","Minha Mãe é uma Peça","2 Filhos de Francisco","O Menino e o Mundo","Bicho de Sete Cabeças","Linha de Passe","O Homem que Copiava","Lisbela e o Prisioneiro","O Quatrilho","Cazuza - O Tempo Não Para","O Palhaço","Divã","Colegas","Hoje Eu Quero Voltar Sozinho","As Melhores Coisas do Mundo","Chico Xavier","Nosso Lar","O Auto da Compadecida","Cidade dos Homens","O Cheiro do Ralo","Lula, o Filho do Brasil","Garota de Ipanema","O Som ao Redor","Bingo: O Rei das Manhãs","Heleno","Reis e Ratos","A Festa da Menina Morta","O Contador de Histórias","Cronicamente Inviável","Amores Possíveis","Olga","Baixio das Bestas","A Hora da Estrela","O Céu de Suely","Estação Carandiru","Bons Tempos no Morro do Chapéu Mangueira","A Vida Invisível","Divino Amor", "Titanic","Avatar","Inception","The Dark Knight","Pulp Fiction","Forrest Gump","The Matrix","Gladiator","The Shawshank Redemption","Fight Club","Interstellar","The Godfather","The Lord of the Rings","Star Wars","Jurassic Park","The Avengers","Black Panther","La La Land","Mad Max: Fury Road","Django Unchained","The Social Network","Whiplash","Blade Runner 2049","Get Out","Her","The Grand Budapest Hotel","Moonlight","12 Years a Slave","Birdman","The Revenant","Gravity","Inside Out","Coco","Zootopia","Frozen","Toy Story 3","Up","WALL-E","Finding Nemo","Monsters, Inc.","Ratatouille","Brave","The Incredibles"],
-    Famosos: ["Anitta","Ivete Sangalo","Whindersson Nunes","Faustão","Gisele Bündchen", "Caio Castro","Bruna Marquezine","Lázaro Ramos","Sabrina Sato","Rodrigo Faro","Tatá Werneck","Wesley Safadão","Claudia Leitte","Fábio Porchat","Marina Ruy Barbosa","Cauã Reymond","Paolla Oliveira","Luan Santana","Neymar Jr.","Bruno Gagliasso","Grazi Massafera","Sérgio Mallandro","Carolina Dieckmann","Rafa Kalimann","Juliana Paes","Felipe Neto","Camila Queiroz","Lucas Lucco","Deborah Secco","Thiaguinho","Isis Valverde","Rodrigo Santoro","Marília Mendonça","Alok","Letícia Sabatella","Chay Suede","Dani Calabresa","Kéfera Buchmann","Sandy Leah","Joaquim Lopes","Ana Maria Braga","Zezé Di Camargo","Ludmilla Oliveira","Maisa Silva","Fábio Assunção","Nanda Costa","Lázaro Ramos","Sérgio Guizé","Carla Diaz","Rômulo Estrela","Juliette Freire","Caetano Veloso","Gilberto Gil","Chico Buarque","Milton Nascimento","Djavan Silva","Gal Costa","Elis Regina","Maria Bethânia","Roberto Carlos","Tim Maia","Cazuza","Marisa Monte","Zeca Pagodinho","Jorge Ben Jor","Djonga Silva","Emicida Silva","Projota Silva","Rincon Sapiência","Karol Conká","Ludmilla Oliveira","IZA da Silva","Vitão Silva","Duda Beat da Silva","Jão da Silva","Letrux da Silva" ]
+  /* Banco de palavras por tema */
+  const palavras = { 
+    comidas: ["feijoada","farofa","acarajé","cuscuz","brigadeiro","pamonha","vatapá","tapioca", "moqueca","canjica"],
+    animais: ["quati","saracura","tatu bola","veado campeiro","zangão","bicho folharal"],
+    objetos: ["caderno","chinelo","garrafa","cadeira","janela","abajur"],
+    Países: ["Brasil","Japão","Canadá","Egito"],
+    Jogadores: ["Neymar","Pelé","Zico","Ronaldo", "Messi"],
+    Marcas: ["Nike","Adidas","Toyota","Apple"],
+    Nomes: ["Ana","Bruno","Carla","Daniel"],
+    Filmes: ["Titanic","Bacurau","Carandiru","Estômago"],
+    Famosos: ["Anitta","Ivete Sangalo","Whindersson Nunes","Faustão"]
   };
 
-  let palavraEscolhida = "";
-  let exibicao = "";
-  let palavraNormalizada = "";
-  let vidasMax = 7;
-  let vidasRestantes = vidasMax;
-  let letrasErradas = new Set();
-  let letrasCertas = new Set();
-  let jogoAtivo = false;
+  /* Variáveis principais do jogo */
+  let palavraEscolhida = ""; // Palavra original com acentos
+  let exibicao = ""; // Palavra exibida com _ _ _
+  let palavraNormalizada = ""; // Palavra sem acentos (para comparação)
+  let vidasMax = 7; // vidas iniciais
+  let vidasRestantes = vidasMax; // vidas em jogo
+  let letrasErradas = new Set(); // Armazena letras incorretas
+  let letrasCertas = new Set(); // Armazena letras corretas
+  let jogoAtivo = false; // Indica se o jogo está ativo
 
-  let dicaUsada = false;
-
+  /* Função que remove acentos para facilitar comparação */
   function normalizar(str) {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   }
 
+  /* Atualiza corações e texto de vidas na tela */
   function atualizarCoracoes() {
     let html = "";
-    for (let i = 0; i < vidasRestantes; i++) html += "❤️";
-    for (let i = 0; i < vidasMax - vidasRestantes; i++) html += "🖤";
+    for (let i = 0; i < vidasRestantes; i++) html += "❤️"; // Vidas ativas
+    for (let i = 0; i < vidasMax - vidasRestantes; i++) html += "🖤"; // Vidas perdidas
     document.getElementById("vidas").innerHTML = html;
     document.getElementById("vidasTexto").textContent =
       `Vidas Restantes: ${vidasRestantes}/${vidasMax}`;
   }
 
+  /* Atualiza letras já tentadas */
   function atualizarLetrasTentadas() {
     const arr = Array.from(letrasErradas).concat(Array.from(letrasCertas));
     document.getElementById("letrasTentadas").textContent =
       arr.length === 0 ? "" : `Letras já tentadas: ${arr.join(", ")}`;
   }
 
+  /* Escolhe aleatoriamente uma palavra do tema */
   function escolherPalavra() {
     const tema = document.getElementById("tema").value;
     palavraEscolhida = palavras[tema][Math.floor(Math.random() * palavras[tema].length)];
     palavraNormalizada = normalizar(palavraEscolhida.toLowerCase());
 
-    exibicao = palavraNormalizada.replace(/[a-z]/gi, "_");
+    exibicao = palavraNormalizada.replace(/[a-z]/gi, "_"); // substitui letras por _
 
     vidasRestantes = vidasMax;
     letrasErradas.clear();
     letrasCertas.clear();
     jogoAtivo = true;
-
-    dicaUsada = false;
-    document.getElementById("btnDica").disabled = false;
-    document.getElementById("dicaTexto").textContent = "";
 
     atualizarCoracoes();
     atualizarLetrasTentadas();
@@ -234,6 +245,7 @@
     document.getElementById("btnChutar").disabled = false;
   }
 
+  /* Atualiza a palavra exibida */
   function atualizarExibicao() {
     let exibicaoComEspacos = "";
     for (let i = 0; i < exibicao.length; i++) {
@@ -246,6 +258,7 @@
     document.getElementById("contador").textContent = counts.join(" | ");
   }
 
+  /* Revela palavra completa (quando vence ou erra tudo) */
   function revelarPalavraCompleta() {
     let revelada = "";
     for (let i = 0; i < palavraEscolhida.length; i++) {
@@ -254,6 +267,7 @@
     document.getElementById("palavra").textContent = revelada;
   }
 
+  /* Encerramento do jogo */
   function encerrarJogo(msg) {
     jogoAtivo = false;
     document.getElementById("resultado").textContent = msg;
@@ -261,53 +275,15 @@
     document.getElementById("btnEnviar").disabled = true;
     document.getElementById("chute").disabled = true;
     document.getElementById("btnChutar").disabled = true;
-    document.getElementById("btnDica").disabled = true;
   }
 
-  function usarDica() {
-    if (!jogoAtivo || dicaUsada) return;
-
-    let indices = [];
-    for (let i = 0; i < exibicao.length; i++) {
-      if (exibicao[i] === "_") indices.push(i);
-    }
-
-    if (indices.length === 0) return;
-
-    const indice = indices[Math.floor(Math.random() * indices.length)];
-    const letraOriginal = palavraEscolhida[indice];
-
-    let nova = exibicao.split("");
-    nova[indice] = letraOriginal;
-    exibicao = nova.join("");
-
-    dicaUsada = true;
-    document.getElementById("btnDica").disabled = true;
-
-    document.getElementById("dicaTexto").textContent =
-      `Dica: A letra "${letraOriginal.toUpperCase()}" está na palavra!`;
-
-    vidasRestantes -= 2;
-    atualizarCoracoes();
-    atualizarExibicao();
-
-    if (vidasRestantes <= 0) {
-      revelarPalavraCompleta();
-      encerrarJogo(`Você perdeu! A palavra era: ${palavraEscolhida}`);
-      return;
-    }
-
-    if (!exibicao.includes("_")) {
-      encerrarJogo("Parabéns! Você completou usando a dica!");
-    }
-  }
-
+  /* Lógica de tentativa de letra única */
   function enviarLetra() {
     if (!jogoAtivo) return;
 
     const entrada = document.getElementById("letra").value.toLowerCase();
-    if (!entrada) return;
     document.getElementById("letra").value = "";
+    if (!entrada) return;
 
     const letraNormalizada = normalizar(entrada);
 
@@ -353,6 +329,7 @@
     }
   }
 
+  /* Chute da palavra completa */
   function chutarPalavra() {
     if (!jogoAtivo) return;
 
@@ -377,12 +354,14 @@
     }
   }
 
+  /* Permite usar Enter para enviar a letra */
   document.addEventListener("keydown", function(e) {
     if (e.key === "Enter" && jogoAtivo && document.activeElement.id === "letra") {
       enviarLetra();
     }
   });
 
+  /* Permite Enter para chutar a palavra */
   document.getElementById("chute").addEventListener("keydown", function(e) {
     if (e.key === "Enter" && jogoAtivo) chutarPalavra();
   });
